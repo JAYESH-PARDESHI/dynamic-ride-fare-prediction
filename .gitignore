@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+env/
+.venv/
+myenv/
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Python build/cache
+.pytest_cache/
+.mypy_cache/
+
+# ML model artifacts
+*.joblib
+*.pickle
+
+# Temporary files
+*.tmp
+*.temp

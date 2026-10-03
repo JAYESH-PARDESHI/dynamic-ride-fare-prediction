@@ -1,0 +1,274 @@
+{
+ "type": "FeatureCollection",
+ "name": "model_area_refinements",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "model_area": "Boston University",
+    "parents": [
+     "Fenway",
+     "Allston"
+    ],
+    "description": "BU Charles River campus along Commonwealth Ave, Kenmore edge (Blandford/Granby St) to Amory St."
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -71.1205,
+       42.3478
+      ],
+      [
+       -71.0998,
+       42.3478
+      ],
+      [
+       -71.0998,
+       42.3556
+      ],
+      [
+       -71.1205,
+       42.3556
+      ],
+      [
+       -71.1205,
+       42.3478
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "model_area": "Northeastern University",
+    "parents": [
+     "Fenway",
+     "Roxbury",
+     "Mission Hill"
+    ],
+    "description": "Northeastern campus between Huntington Ave, Ruggles St, Forsyth/Parker St and Columbus Ave."
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -71.093,
+       42.335
+      ],
+      [
+       -71.083,
+       42.335
+      ],
+      [
+       -71.083,
+       42.342
+      ],
+      [
+       -71.093,
+       42.342
+      ],
+      [
+       -71.093,
+       42.335
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "model_area": "North Station",
+    "parents": [
+     "West End",
+     "Downtown"
+    ],
+    "description": "North Station / TD Garden block, Causeway St corridor."
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -71.066,
+       42.364
+      ],
+      [
+       -71.059,
+       42.364
+      ],
+      [
+       -71.059,
+       42.3685
+      ],
+      [
+       -71.066,
+       42.3685
+      ],
+      [
+       -71.066,
+       42.364
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "model_area": "Haymarket Square",
+    "parents": [
+     "Downtown",
+     "North End",
+     "West End"
+    ],
+    "description": "Haymarket / Blackstone St market district north of Government Center."
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -71.0615,
+       42.3607
+      ],
+      [
+       -71.056,
+       42.3607
+      ],
+      [
+       -71.056,
+       42.364
+      ],
+      [
+       -71.0615,
+       42.364
+      ],
+      [
+       -71.0615,
+       42.3607
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "model_area": "Financial District",
+    "parents": [
+     "Downtown"
+    ],
+    "description": "State St to Summer St, Washington St side to Atlantic Ave."
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -71.0585,
+       42.3535
+      ],
+      [
+       -71.051,
+       42.3535
+      ],
+      [
+       -71.051,
+       42.3592
+      ],
+      [
+       -71.0585,
+       42.3592
+      ],
+      [
+       -71.0585,
+       42.3535
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "model_area": "South Station",
+    "parents": [
+     "Downtown",
+     "Chinatown",
+     "South Boston Waterfront"
+    ],
+    "description": "South Station, Dewey Square, Summer St to Fort Point Channel edge."
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -71.0585,
+       42.349
+      ],
+      [
+       -71.051,
+       42.349
+      ],
+      [
+       -71.051,
+       42.3535
+      ],
+      [
+       -71.0585,
+       42.3535
+      ],
+      [
+       -71.0585,
+       42.349
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "model_area": "Theatre District",
+    "parents": [
+     "Downtown",
+     "Chinatown"
+    ],
+    "description": "Tremont/Stuart/Boylston/Washington St theatre blocks (Wang, Colonial, Opera House); Chinatown gate is excluded."
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -71.068,
+       42.349
+      ],
+      [
+       -71.0636,
+       42.349
+      ],
+      [
+       -71.0636,
+       42.355
+      ],
+      [
+       -71.068,
+       42.355
+      ],
+      [
+       -71.068,
+       42.349
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

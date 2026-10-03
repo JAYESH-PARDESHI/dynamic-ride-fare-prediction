@@ -1,0 +1,14 @@
+# --- ML stack: MUST match the versions used to train/save the pickle ---
+scikit-learn==1.7.2
+xgboost==3.4.1
+pandas==2.3.3
+numpy==2.3.4
+joblib==1.5.3
+
+# --- web stack (versions the backend was tested with) ---
+fastapi==0.142.2
+uvicorn[standard]==0.54.0
+httpx==0.28.1
+pydantic==2.13.5
+pydantic-settings==2.15.0   # also installs python-dotenv (reads .env)
+tzdata==2026.4              # Boston time zone data - Windows has none built in

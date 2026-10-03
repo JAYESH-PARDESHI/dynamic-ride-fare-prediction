@@ -1,0 +1,9 @@
+{
+ "official_to_model": {
+  "Back Bay": "Back Bay",
+  "Beacon Hill": "Beacon Hill",
+  "North End": "North End",
+  "West End": "West End",
+  "Fenway": "Fenway"
+ }
+}
