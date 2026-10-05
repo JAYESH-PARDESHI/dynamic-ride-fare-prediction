@@ -123,3 +123,15 @@ n_jobs            = -1
 - Adjusted R² : 0.961
 - MAE :	$1.13
 - RMSE : $1.83
+
+## 🔌 API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/v1/locations/search` | Search for pickup or destination locations |
+| `GET` | `/api/v1/locations/reverse` | Convert map coordinates into a location |
+| `POST` | `/api/v2/fare/predict` | Predict ride fare using the trained ML model |
+
+### 📚 API Documentation
+
+🔗 **Swagger Docs:** https://dynamic-ride-fare-prediction.onrender.com/docs
