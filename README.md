@@ -134,4 +134,4 @@ n_jobs            = -1
 
 ### 📚 API Documentation
 
-🔗 **Swagger Docs:** https://dynamic-ride-fare-prediction.onrender.com/docs
+🔗 **Swagger Docs:** [https://dynamic-ride-fare-prediction.onrender.com/docs](https://dynamic-ride-fare-prediction.onrender.com/docs)
