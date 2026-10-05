@@ -120,5 +120,6 @@ n_jobs            = -1
 
 - Metric	Score
 - R²	0.962
+- Adjusted R² 0.961
 - MAE	$1.13
 - RMSE	$1.83
