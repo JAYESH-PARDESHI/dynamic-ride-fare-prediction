@@ -4,7 +4,7 @@
 
 ### 🚕 Ride Booking Interface
 
-![Ride Booking Interface](screenshots/Screenshot_5-10-2026_213143_chatgpt.com.jpeg)
+![Ride Booking Interface]("C:\Users\Pushpraj Pardeshi\Downloads\Screenshot 2026-10-05 215040.png")
 
 ### 🗺️ Route & Fare Prediction
 
