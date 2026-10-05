@@ -132,14 +132,6 @@ n_jobs            = -1
 | `GET` | `/api/v1/locations/reverse` | Convert map coordinates into a location |
 | `POST` | `/api/v2/fare/predict` | Predict ride fare using the trained ML model |
 
-## 🔌 API Endpoints
-
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/v1/locations/search` | Search for pickup or destination locations |
-| `GET` | `/api/v1/locations/reverse` | Convert map coordinates into a location |
-| `POST` | `/api/v2/fare/predict` | Predict ride fare using the trained ML model |
-
 ### 📚 API Documentation
 
 [Dynamic Ride Fare Prediction API - Swagger UI](https://dynamic-ride-fare-prediction.onrender.com/docs)
