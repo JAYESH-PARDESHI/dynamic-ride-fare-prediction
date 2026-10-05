@@ -135,3 +135,11 @@ n_jobs            = -1
 ### 📚 API Documentation
 
 [Dynamic Ride Fare Prediction API - Swagger UI](https://dynamic-ride-fare-prediction.onrender.com/docs)
+
+## ⚠️ Limitations
+
+- Fare predictions are based on historical ride data and may differ from real-time ride-hailing prices.
+- The model is trained on Boston-area ride data, so predictions are intended for supported Boston locations.
+- Weather, routing, and geocoding data depend on external APIs and their availability.
+- The system does not use an official Uber pricing API; displayed Uber fares are manual comparisons only.
+- Real-world fares can vary due to demand, traffic, tolls, taxes, fees, and other dynamic pricing factors.
