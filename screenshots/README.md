@@ -4,12 +4,12 @@
 
 ### 🚕 Ride Booking Interface
 
-![Ride Booking Interface]([screenshots/ride-booking-interface.png](https://github.com/JAYESH-PARDESHI/dynamic-ride-fare-prediction/blob/main/screenshots/Screenshot_5-10-2026_213143_chatgpt.com.jpeg))
+![Ride Booking Interface](screenshots/Screenshot_5-10-2026_213143_chatgpt.com.jpeg)
 
 ### 🗺️ Route & Fare Prediction
 
-![Route and Fare Prediction](screenshots/fare-prediction-result.png)
+![Route and Fare Prediction](screenshots/Screenshot_5-10-2026_213213_chatgpt.com.jpeg)
 
 ### 📍 Location Mapping & Fare Estimate
 
-![Location Mapping and Fare Estimate](screenshots/location-mapping.png)
+![Location Mapping and Fare Estimate](screenshots/Screenshot_5-10-2026_213239_chatgpt.com.jpeg)
