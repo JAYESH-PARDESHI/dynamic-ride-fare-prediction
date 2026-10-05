@@ -4,7 +4,8 @@
 
 ### 🚕 Ride Booking Interface
 
-![Ride Booking Interface]("C:\Users\Pushpraj Pardeshi\Downloads\Screenshot 2026-10-05 215040.png")
+![Ride Booking Interface](<img width="1914" height="991" alt="Screenshot 2026-10-05 215040" src="https://github.com/user-attachments/assets/67ac29a6-f682-4586-9848-8f2b2140d3cc" />
+)
 
 ### 🗺️ Route & Fare Prediction
 
