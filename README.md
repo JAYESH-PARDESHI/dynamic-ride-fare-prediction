@@ -136,7 +136,8 @@ n_jobs            = -1
 
 [Dynamic Ride Fare Prediction API - Swagger UI](https://dynamic-ride-fare-prediction.onrender.com/docs)
 
-## ⚠️ Limitations
+
+### ⚠️ Limitations
 
 - Fare predictions are based on historical ride data and may differ from real-time ride-hailing prices.
 - The model is trained on Boston-area ride data, so predictions are intended for supported Boston locations.
