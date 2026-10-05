@@ -118,8 +118,8 @@ n_jobs            = -1
 
 -- The model was evaluated on a held-out test set.
 
-- Metric	Score
-- R²	0.962
-- Adjusted R² 0.961
-- MAE	$1.13
-- RMSE	$1.83
+- Metric Score
+- R² : 0.962
+- Adjusted R² : 0.961
+- MAE :	$1.13
+- RMSE : $1.83
