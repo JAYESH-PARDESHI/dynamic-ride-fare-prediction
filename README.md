@@ -297,8 +297,7 @@ dynamic-ride-fare-prediction/
 ├── fare-frontend-updated/
 ├── notebooks/
 │   └── ride_fare_prediction.ipynb
-├── docs/
-│   └── dataset_information.md
+│   
 ├── screenshots/
 ├── README.md
 └── requirements.txt
