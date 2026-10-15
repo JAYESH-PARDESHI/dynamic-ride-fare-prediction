@@ -1,10 +1,10 @@
-```python
 """Place search + reverse geocoding using Nominatim by default.
 
 Important:
 - Identifying User-Agent using GEOCODER_CONTACT.
 - Spaces provider requests using an async scheduler.
 - Caches search and reverse-geocoding results.
+- Shares one provider call between identical concurrent requests.
 - Honors Retry-After when Nominatim returns HTTP 429.
 - Temporarily pauses requests after a rate-limit response.
 - Preserves OpenStreetMap attribution.
@@ -17,8 +17,11 @@ import asyncio
 import logging
 import re
 import time
+from collections.abc import Awaitable, Callable
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+from typing import Hashable, TypeVar
 
 import httpx
 
@@ -43,21 +46,16 @@ MAX_QUERY_LENGTH = 200
 MIN_QUERY_ALNUM = 2
 VIEWBOX_MARGIN = 0.01
 
+T = TypeVar("T")
 
+
+@dataclass(frozen=True)
 class Place:
-    def __init__(
-        self,
-        display_name: str,
-        name: str,
-        latitude: float,
-        longitude: float,
-        area: AreaMatch,
-    ):
-        self.display_name = display_name
-        self.name = name
-        self.latitude = latitude
-        self.longitude = longitude
-        self.area = area
+    display_name: str
+    name: str
+    latitude: float
+    longitude: float
+    area: AreaMatch
 
 
 def clean_query(text: str) -> str:
@@ -107,6 +105,9 @@ class GeocodingService:
         self._next_free = 0.0
         self._blocked_until = 0.0
 
+        # Identical in-flight lookups share one provider call.
+        self._inflight: dict[Hashable, asyncio.Task] = {}
+
         ttl = settings.geocoder_cache_seconds
         self._search_cache: TTLCache[list[Place]] = TTLCache(
             ttl, max_entries=2000
@@ -115,6 +116,36 @@ class GeocodingService:
             ttl, max_entries=5000
         )
 
+    # ---------------------------------------------------------- single flight
+    async def _single_flight(
+        self,
+        key: Hashable,
+        factory: Callable[[], Awaitable[T]],
+    ) -> T:
+        """Run factory() once per key at a time; concurrent callers share it.
+
+        The shared task is shielded, so one caller disconnecting (for example
+        an aborted browser request) does not cancel the lookup for the others,
+        and the finished result still lands in the cache.
+        """
+        task = self._inflight.get(key)
+
+        if task is None:
+            task = asyncio.ensure_future(factory())
+            self._inflight[key] = task
+
+            def _cleanup(done: asyncio.Task, key: Hashable = key) -> None:
+                if self._inflight.get(key) is done:
+                    del self._inflight[key]
+                # Mark the exception as retrieved so asyncio does not log
+                # "Task exception was never retrieved" if every waiter left.
+                if not done.cancelled():
+                    done.exception()
+
+            task.add_done_callback(_cleanup)
+
+        return await asyncio.shield(task)
+
     # --------------------------------------------------------------- search
     async def search(self, text: str) -> list[Place]:
         query = clean_query(text)
@@ -122,8 +153,15 @@ class GeocodingService:
 
         cached = self._search_cache.get(key)
         if cached is not None:
-            return cached
+            return list(cached)
 
+        places = await self._single_flight(
+            ("search", key),
+            lambda: self._search_uncached(query, key),
+        )
+        return list(places)
+
+    async def _search_uncached(self, query: str, key: str) -> list[Place]:
         min_lon, min_lat, max_lon, max_lat = self._mapper.bbox
 
         data = await self._get(
@@ -198,6 +236,17 @@ class GeocodingService:
         if cached is not None:
             return cached
 
+        return await self._single_flight(
+            ("reverse", key),
+            lambda: self._reverse_uncached(latitude, longitude, key),
+        )
+
+    async def _reverse_uncached(
+        self,
+        latitude: float,
+        longitude: float,
+        key: tuple[float, float],
+    ) -> Place:
         data = await self._get(
             "/reverse",
             {
@@ -362,4 +411,3 @@ def _short_name(item: dict, display_name: str) -> str:
         return name.strip()
 
     return display_name.split(",")[0].strip()
-```
