@@ -45,6 +45,9 @@ ATTRIBUTION = "(c) OpenStreetMap contributors"
 MAX_QUERY_LENGTH = 200
 MIN_QUERY_ALNUM = 2
 VIEWBOX_MARGIN = 0.01
+# After any provider 429, pause at least this long even if Retry-After is
+# missing or 0. A longer pause still respects Retry-After.
+MIN_RATE_LIMIT_COOLDOWN_SECONDS = 15.0
 
 T = TypeVar("T")
 
@@ -93,6 +96,18 @@ class GeocodingService:
             "User-Agent": "fare-prediction-backend/1.0"
             + (f" ({contact})" if contact else "")
         }
+
+        # Optional API key for providers such as LocationIQ (sent as ``key``).
+        # Never logged: this module does not log request URLs or params.
+        api_key = getattr(settings, "geocoder_api_key", None)
+        if api_key is not None and hasattr(api_key, "get_secret_value"):
+            api_key = api_key.get_secret_value()
+        self._api_key = (api_key or "").strip()
+        logger.info(
+            "Geocoder configured: base_url=%s api_key_configured=%s",
+            self._base_url,
+            bool(self._api_key),
+        )
 
         self._min_interval = max(
             1.0, settings.geocoder_min_interval_seconds
@@ -340,7 +355,10 @@ class GeocodingService:
 
     async def _apply_rate_limit(self, response: httpx.Response) -> None:
         """Pause future requests after a provider rate-limit response."""
-        delay = self._retry_after_seconds(response)
+        delay = max(
+            self._retry_after_seconds(response),
+            MIN_RATE_LIMIT_COOLDOWN_SECONDS,
+        )
         blocked_until = time.monotonic() + delay
 
         async with self._scheduler_lock:
@@ -361,6 +379,11 @@ class GeocodingService:
     # ------------------------------------------------------------------- HTTP
     async def _get(self, path: str, params: dict):
         await self._reserve_slot()
+
+        if self._api_key:
+            # Keyed providers document format=json (Nominatim's jsonv2 is
+            # specific to the public Nominatim server).
+            params = {**params, "key": self._api_key, "format": "json"}
 
         try:
             response = await self._client.get(
@@ -390,8 +413,9 @@ class GeocodingService:
 
         except httpx.HTTPStatusError as exc:
             logger.warning(
-                "Geocoder returned HTTP %s",
+                "Geocoder returned HTTP %s: %s",
                 exc.response.status_code,
+                _error_snippet(exc.response),
             )
             raise GeocodingUnavailableError(
                 "The location service is currently unavailable."
@@ -411,3 +435,12 @@ def _short_name(item: dict, display_name: str) -> str:
         return name.strip()
 
     return display_name.split(",")[0].strip()
+
+
+def _error_snippet(response: httpx.Response) -> str:
+    """Short provider error text for logs (never includes request params)."""
+    try:
+        text = " ".join(response.text.split())
+    except Exception:
+        return "<unreadable body>"
+    return text[:200] or "<empty body>"
