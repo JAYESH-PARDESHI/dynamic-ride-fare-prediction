@@ -40,6 +40,7 @@ class Settings(BaseSettings):
     # app/services/geocoding_service.py. For production traffic use your own Nominatim
     # instance or a commercial provider and set GEOCODER_BASE_URL.
     geocoder_base_url: str = "https://nominatim.openstreetmap.org"
+    geocoder_api_key: SecretStr | None = None  # optional, e.g. LocationIQ access token (GEOCODER_API_KEY)
     geocoder_contact: str = ""  # email or URL put into the User-Agent (strongly recommended)
     geocoder_min_interval_seconds: float = 1.0  # provider policy: <= 1 request / second
     geocoder_max_queue_seconds: float = 4.0  # waiting longer than this -> HTTP 429
